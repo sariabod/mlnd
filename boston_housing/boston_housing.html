@@ -11802,7 +11802,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Import libraries necessary for this project</span>
@@ -11900,23 +11900,23 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># TODO: Minimum price of the data</span>
-<span class="n">minimum_price</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+<span class="n">minimum_price</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">prices</span><span class="p">)</span>
 
 <span class="c1"># TODO: Maximum price of the data</span>
-<span class="n">maximum_price</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+<span class="n">maximum_price</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">prices</span><span class="p">)</span>
 
 <span class="c1"># TODO: Mean price of the data</span>
-<span class="n">mean_price</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">mean_price</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">prices</span><span class="p">)</span>
 
 <span class="c1"># TODO: Median price of the data</span>
-<span class="n">median_price</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="n">median</span><span class="p">()</span>
+<span class="n">median_price</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">prices</span><span class="p">)</span>
 
 <span class="c1"># TODO: Standard deviation of prices of the data</span>
-<span class="n">std_price</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+<span class="n">std_price</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">prices</span><span class="p">)</span>
 
 <span class="c1"># Show the calculated statistics</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Statistics for Boston housing dataset:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -11947,7 +11947,7 @@ Minimum price: $105000.0
 Maximum price: $1024800.0
 Mean price: $454342.9447852761
 Median price $438900.0
-Standard deviation of prices: $165340.27765266784
+Standard deviation of prices: $165171.13154429474
 </pre>
 </div>
 </div>
@@ -11985,6 +11985,8 @@ Standard deviation of prices: $165340.27765266784
 <p>I would expect MEDV to increase as the value of RM increases. More rooms generally means a bigger house and a bigger house generelly needs more material and a bigger plot.</p>
 <p>I would expect MEDV to decrease as the LSTAT goes up. Pricing can fluctuate greatly simply by how much money is in the community. Less money may mean less services, less community ammenities, less businesses.</p>
 <p>I do not expect the PTRATIO to affect MEDV in a meaningful way. If there were a lot of students in the area that may push the prices down as students generally do not have a lot of money but a ratio doesn't tell me much. When a 10-1 student/teacher has the same ratio as 100-1000 as it does to 10000 to 1000000 I do not see how this will impact MEDV in a predictable way.</p>
+<p>EDIT:
+The issue I have with PTRATIO is that it is a ratio and doesn't describe concrete numbers. To me, it is very hard to justify that as a metric without the actual numbers. Does this include private schools? There could be 3 schools in the discrict and one is bringing the entire average down. Crowded schools can easily lower housing prices even if the teacher/student ratio is acceptable. I understand what your saying and maybe the ratio does affect it, but in my head I find it a questionable feature.</p>
 
 </div>
 </div>
@@ -12135,6 +12137,8 @@ Standard deviation of prices: $165340.27765266784
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong></p>
 <p>I would consider the model to have successfully captured the variation. The R2 result is sitting at just north of 92%. 92% of the variance in Y is predictable from X.</p>
+<p>Edit:</p>
+<p>R2 range is from 0 to 1 where a 1 would be perfect correlation between the independent variable and the dependent variable. In this example, the value that we cannot account for is 8% (1 - R2). We have 8% residuals that are not covered by the model but 92% of the variance in Price (Y) can be accounted for by the variance in X. This alone does not mean the model is good or bad, you still need to look at the actual points to make sure.</p>
 
 </div>
 </div>
@@ -12216,6 +12220,8 @@ Standard deviation of prices: $165340.27765266784
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer: </strong></p>
 <p>Splitting out a testing set ensures that you do not train the model on your testing set as that may lead to overfitting.</p>
+<p>Edit:</p>
+<p>Interesting point. Everything I have read generally says you split so you can have something to test your model on and also to make sure you model is unbiased. If you use your entire dataset to train then you may not be able to test properly after you take a subset of the data for testing since the model has already seen that exact data and accounted for it. How much to split has to be on a case by case basis depending your data and how much of it you have. If you do not have enough data you will need to implement other techniques to maximize what you do have otherwise testing may be problamatic.</p>
 
 </div>
 </div>
@@ -12297,6 +12303,8 @@ Think about the pros and cons of adding more training points based on if the tra
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer: </strong></p>
 <p>The graph with the maximum depth of 3 looks like it performs the best. Both the test curve and the train curve are converging on the .8 mark as more data points are added. Adding more points will help the model get past the .8 mark since both curves are converging to the same point.</p>
+<p>Edit:</p>
+<p>Typo :) Adding more point will NOT help model get past the .8 mark since both curves are converging to the same point.</p>
 
 </div>
 </div>
@@ -12365,6 +12373,11 @@ Think about the pros and cons of adding more training points based on if the tra
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer: </strong></p>
 <p>With only a depth of one, the model suffers from high bias (underfitting). Both training and testing scored low. At the max depth of 10 the model starts to suffer from high variance (overfitting). Visually, you can see the training score getting higher (the model starts to memorize the data) and the testing score dropping due the model not being general enough to handle random data.</p>
+<p>Edit:</p>
+<p>High bias model for a data set?
+To fix underfitting will depend on the algorithm that is beign used. Generally though, your model is too simple for the data it is trying to analyze. You may need more layers for your CNN, more depth on your decision tree, maybe your linear needs to be a polynomial to better capture the data points.</p>
+<p>High variance model for a data set?
+This can result in overfitting where your model is so complex it starts to memorize the data resulting in poor performance with random data. Fixing this requires the model to be simplified a bit to make it more general. Also, I believe having more data can help.</p>
 
 </div>
 </div>
@@ -12448,6 +12461,8 @@ Think about the pros and cons of adding more training points based on if the tra
 <p><strong>Answer: </strong></p>
 <p>K-fold CV is a technique used to help eliminate variance (overfitting). The "k" in k-fold is how many equal parts you want to break up your data into. The number of times your model will be run will always be k-1 (one part is always used for testing).</p>
 <p>Since k-fold helps to eliminate variance, it will also help with Gridsearch results. If you use a gridsearch on a specific train / test set that is not representative of the data then all your results will be skewed. Implementing k-fold into gridsearch helps prevent this. A couple drawbacks of gridsearch can be the size of your dataset or the speed of your model. If your dataset is large, gridsearch can be computationaly taxing and if your model is slow, then gridsearch can be time taxing.</p>
+<p>Edit:</p>
+<p>Thank you for the detailed explanation. So k-folds main objective is to give an unbiased estimate of the model on unseen data. I keep thinking of it in terms of variance but it is really a validation technique. Then this in turn will also help finding the right hyperparameter combination when doing a gridsearch.</p>
 
 </div>
 </div>
@@ -12687,6 +12702,10 @@ Predicted selling price for Client 3&#39;s home: $893,760.00
 <p>Client 2: $216,232.26</p>
 <p>Client 3: $893,760.00</p>
 <p>These numbers do not seem good stricly from an intuition perspective. I would have expected client 3's house with 8 rooms and virtually no poverty to be closer to top end and client 2 to be closer to the bottom end.</p>
+<p>Edit:</p>
+<p>I would expect client 3's house to sell for over a million based on the features. For other houses with similar stats it has 8 rooms, one the lowest poverty levels and the lowest student to teacher ratio. At 893K it puts this house BELOW the mean of the other 8 room houses.</p>
+<p>Client 2's price looks a little more reasonable. Similar housing that matched their features had a mean of 275,625.00 but the all had more RMs. This being a little less on the rooms can justify the lower price.</p>
+<p>Client 1's home looks underpriced, for similar homes I found a mean of 345,275.00 and this one has a better student/teacher ratio. I would expect it to atleast sell for the mean, not under it.</p>
 
 </div>
 </div>
@@ -12768,6 +12787,11 @@ Range in prices: $69,044.61
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer: </strong></p>
 <p>This model could not be used in todays market. Inflation is mandatory to factor in but there isn't enough features of the individual house in this model. Year the house was built, garage size, pool, plot size are all very important. Location is also critical. Getting a rough estimate of a house cost based on the neighboorhood is fine, but to sell a house you need to factor in the individual features.</p>
+<p>Edit:</p>
+<p>Is the model robust enough to make consistent predictions?
+I do not believe the model will make good predictions based on the feature set that was used. I think there are much more important individual house features that are needed.</p>
+<p>Would data collected in an urban city like Boston be applicable in a rural city?
+I do not believe this will work going from Boston to a rural city. Location plays a critical role in the features needed for evaluation. This model is too simplistic in my opinion.</p>
 
 </div>
 </div>
