@@ -12254,6 +12254,10 @@ div#notebook {
 <p><strong>Answer:</strong></p>
 <p>I tried to predict the Fresh feature. The default params netted me a large negative number (-.89). By default, the model could not perform better then a straight line. I tried to play with the model to see if I can improve it but ended up as high as .22 and that was it.</p>
 <p>The results tell me this feature is pretty random and will not help in determinining spending habits in relation to the other features.</p>
+<p><strong>Answer Review 1:</strong></p>
+<p>Can you please clarify this statement:</p>
+<p><i>Actually in this part of exercise you should remove irrelevant variable as it won't affect the predictions. The objective of this section is to find out the relevance of features for the unsupervised clustering model—whether it's necessary for us to have that feature or if we can simply delete it without losing much information about our customers.</i></p>
+<p>I identified Fresh as not having much correlation and will not affect the determination of spending habits. Is this not correct?</p>
 
 </div>
 </div>
@@ -13553,6 +13557,13 @@ Name: 0, dtype: int64
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong></p>
 <p>There were not that many outliers that got flagged in multiple features so they were removed as to not skew the analysis. If many of the datapoints had overlapping feature outliers we would need to consider if removing them is a good idea, especially if they show correlation to one another. I also marked a few individual outliers for removal, ones that were visibly extreme compared to the others in the list.</p>
+<p><strong>Answer Review #1</strong></p>
+<p>I am not 100% clear on this statement:</p>
+<p><i>Almost there.</p>
+<p>Actually there are only 5 data points which are double-counted. Try to identify from the tables you have provided where a indice is also counted at another table.</p>
+<p>For example:
+65, 66, 75, etc...&lt;/i&gt;</p>
+<p>I identified the outliers that appear multiple times in the cell above Question 4 and removed them. Can you please clarify this?</p>
 
 </div>
 </div>
